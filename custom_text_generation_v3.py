@@ -319,9 +319,9 @@ def generate_data(background: np.array,
                   debug_dir: str=None,
                   type_text: str=None,
                   type_card: str="old_cccd"):
-    #######################
-    # Generate text image #
-    #######################
+    ######################################
+    # Choice top possition to paste text #
+    ######################################
     background = cv2.cvtColor(background,cv2.COLOR_BGR2RGB)
     if type_card == "old_cccd":
         top_left = (203,368)
@@ -345,7 +345,10 @@ def generate_data(background: np.array,
             top_left = (25,95)
         else:
             print("Only support for cccd_chip and the cccd!!!")
-            
+    
+    #######################
+    # Generate text image #
+    #######################      
     # if option_2
     # font = "/home/jon/vietocr/VietNamese-OCR-DataGenerator/fonts/cccd/Roboto-Black.ttf"
     
@@ -483,7 +486,7 @@ def generate_data(background: np.array,
 
 
     res_image = crop_image.copy()
-    # Only blur edge of text
+    # Only blur edge of text, This is the key contribution of this code that make text image differnce from other augmented text image
     res_image[edge>0] = blur[edge>0]
     final_image = cv2.GaussianBlur(res_image,(3,3),0)
     final_image = cv2.GaussianBlur(final_image,(3,3),0)

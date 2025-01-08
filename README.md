@@ -31,7 +31,21 @@ python myanmar_handwriting_text_generation.py
 
 The output image and label will appear in your ```save_image_path``` and ```save_path``` 
 
-### 2. custom_text_generation_v2.py 
+### 2. custom_text_generation_v3.py 
+> The file generate text image following 5 step:
+
+- Choice ```text box coordinate``` based on type card (cccd chip/the cccd) and type text(hokhauthuongtru/nguyenquan)
+
+- Generate ```text image and mask of text``` with PIL (text with black and background with white color)
+
+- Blend text with background by random weight -> make text more natural
+
+- Paste only black text into *embryo* background by using ```mask of text``` and text box coordinate 
+
+- Crop text from *embryo* background 
+
+- Blur only edge of text -> make text more thin but keep the text sketon
+
 > Following below step to run 
 
 Step 1: Prepare new background (the cccd) in **background_cccd_new** and former background (cccd_chip) in **background**
